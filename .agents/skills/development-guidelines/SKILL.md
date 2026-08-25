@@ -1,77 +1,30 @@
 ---
 name: development-guidelines
-description: チーム全体で統一された開発プロセスと JavaScript + Expo 実装規約を定義するためのガイドとテンプレート。開発ガイドライン作成時、コード実装時に使用する。
-allowed-tools: Read, Write, Edit
+description: docs/architecture.mdとdocs/repository-structure.mdからdocs/development-guidelines.mdを作成・更新し、JavaScript・React Native・Expoの実装規約と開発プロセスを定義する場合、または合意済み規約をコード実装時に参照する場合に明示的に使用する。機能要件やアーキテクチャの決定には使用しない。
 ---
 
-# 開発ガイドラインスキル
+# Development Guidelines
 
-チーム開発に必要な 2 つの要素をカバーします:
-1. JavaScript / React Native / Expo 実装規約
-2. 開発プロセスと品質ゲート
+## 入力と出力
 
-## 前提条件
+- 文書作成の必須入力: `docs/architecture.md`、`docs/repository-structure.md`
+- 出力: `docs/development-guidelines.md`
+- 実装支援時: 既存の `docs/development-guidelines.md` を最優先し、このSkillは補助にだけ使う
 
-開発ガイドライン作成を開始する前に、以下を確認してください:
+必須文書がない、品質方針が未決定、またはアーキテクチャと配置規則が矛盾する場合は、推測で規約を確定せず不足を返す。
 
-1. `docs/architecture.md` - 技術スタックとレイヤー境界
-2. `docs/repository-structure.md` - ディレクトリ構造
+## 手順
 
-## 既存ドキュメントの優先順位
+1. 技術前提、レイヤー境界、ファイル配置、既存の品質scriptを確認する。
+2. 新規作成時だけ [assets/template.md](assets/template.md) を使う。更新時は既存文書の確定済み判断を維持する。
+3. コード規約の詳細が必要な場合は [references/implementation.md](references/implementation.md)、作業工程と品質ゲートは [references/process.md](references/process.md) を読む。
+4. JavaScript/JSDoc、component、hook、service、エラー、セキュリティ、性能、test、Git、review、Definition of Doneをプロジェクト要件に合わせて定義する。
+5. `package.json` に存在する `lint`、`test`、`test:coverage` だけを品質ゲート候補にする。未定義scriptを暗黙に必須化しない。
+6. 固定カバレッジ閾値はユーザーがプロジェクト要件として合意した場合だけ記載する。
 
-`docs/development-guidelines.md` がある場合はそれを最優先にし、このスキルは補助資料として使います。
+## 完了条件
 
-## 出力先
-
-```text
-docs/development-guidelines.md
-```
-
-## クイックリファレンス
-
-### 実装時
-参照: `./guides/implementation.md`
-
-含まれる内容:
-- JavaScript / JSDoc 規約
-- React Native コンポーネント規約
-- hook / service / logic の責務分離
-- エラーハンドリング
-- unit test / component test
-
-### プロセス確認時
-参照: `./guides/process.md`
-
-含まれる内容:
-- `.steering/` を使った進行管理
-- Git 運用ルール
-- PR / レビューの進め方
-- 品質ゲート
-- `npm run lint` / `npm test` / `npx expo start` の確認手順
-
-### テンプレート
-参照: `./template.md`
-
-## 使用シーン別ガイド
-
-### 新規開発時
-1. `./guides/implementation.md` で規約確認
-2. `./guides/process.md` で作業フロー確認
-3. `.steering/[YYYYMMDD]-[task]/` を準備
-4. `npm run lint`、`npm test`、`npx expo start` を基準に進める
-
-### コードレビュー時
-- `./guides/process.md` のレビュー観点を使う
-- `./guides/implementation.md` で規約違反を確認する
-
-### テスト設計時
-- `./guides/implementation.md` の test 実装例を使う
-- `./guides/process.md` の品質ゲートと実機確認手順を使う
-
-## チェックリスト
-
-- [ ] JavaScript + Expo 前提が明記されている
-- [ ] JSDoc と命名規則が具体例付きで定義されている
-- [ ] `npm run lint` / `npm test` / `npx expo start` の確認手順がある
-- [ ] component test と実機確認の役割分担が定義されている
-- [ ] `.steering/` と `docs/` の更新ルールが記載されている
+- 文書作成時は `docs/development-guidelines.md` だけを変更する。
+- 規約がarchitecture、repository structure、利用可能なscriptsと整合する。
+- 実装支援時は合意済み規約を適用するだけで、未合意の規約を追加しない。
+- 変更内容、根拠、検証、残課題を日本語で簡潔に返す。

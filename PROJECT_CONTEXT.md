@@ -1,53 +1,27 @@
 # Project Context
 
-This repository contains a React Native application built with Expo.
+## 目的
 
-### 日本語説明
-このリポジトリは、Expo を使って構築する React Native アプリを前提としています。
+このリポジトリは、AI駆動でReact Nativeモバイルアプリを新規開発するための再利用テンプレートである。アプリケーション固有の要件と実装は含めず、仕様作成、設計、実装、検証を一貫して進めるCodex開発環境を提供する。
 
-## Technology
+## 技術前提
 
-React Native
-Expo managed workflow
-JavaScript (not TypeScript)
+- App type: React Native mobile application
+- Framework: Expo managed workflow
+- Language: JavaScript（TypeScriptは既定で使用しない）
+- Package manager: npm
+- Node: 22
+- Expo SDK: 54
 
-### 日本語説明
-- UI 基盤は React Native です。
-- 実行方式は Expo managed workflow を使います。
-- 実装言語は JavaScript で、TypeScript は前提にしません。
+## 開発コマンド
 
-## Environment
+- 通常起動: `npx expo start`
+- リモート端末確認: `npx expo start --tunnel`
+- Expo関連依存の追加: `npx expo install <package>`
 
-Node 22
-Expo SDK 54
+## 制約
 
-### 日本語説明
-- Node の実行環境は 22 系を使います。
-- Expo SDK は 54 を前提にします。
-
-## Development
-
-Start development server:
-
-`npx expo start`
-
-For remote device testing:
-
-`npx expo start --tunnel`
-
-### 日本語説明
-通常の開発サーバー起動は `npx expo start` を使います。  
-リモート端末で確認したい場合は `npx expo start --tunnel` を使います。
-
-## Dependency policy
-
-Use `npx expo install` for Expo-related dependencies.
-
-Do not upgrade Expo SDK unless explicitly requested.
-
-Do not change Node version automatically.
-
-### 日本語説明
-Expo 関連の依存関係は `npx expo install` を使って追加・更新します。  
-Expo SDK は明示依頼がない限りアップグレードしません。  
-Node のバージョンも自動では変更しません。
+- Expo SDKとNodeのバージョンは明示依頼なしに変更しない
+- Expo関連依存にはExpo互換バージョンを使用する
+- `.devcontainer/` は任意の将来用構成であり、Docker利用を必須にしない
+- プロジェクト固有の要件は `docs/ideas/initial-requirements.md` から開始し、安定後は `docs/` の永続文書を正本とする

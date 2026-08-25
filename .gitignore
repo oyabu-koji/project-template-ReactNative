@@ -40,9 +40,7 @@ coverage/
 .expo/
 web-build/
 
-# Steering files (task management - temporary)
-.steering/*
-!.steering/.gitkeep
+# Steering plans are tracked as the durable task-progress record.
 
 # Codex temporary workspaces
 .agents/workspaces/*

@@ -1,62 +1,48 @@
 ---
 name: steering
-description: `plan-feature` で作成した作業計画を維持し、`implement-feature` から `validate-implementation` までの進捗を管理するスキル
+description: docs/ideasの日付付き仕様から作成された.steering/[YYYYMMDD]-[task]/のrequirements.md、design.md、tasklist.mdを計画・実装・検証の間で維持する場合に明示的に使用する。initial-requirementsからの直接計画、仕様正本の代替、実装検証中の進捗改変には使用しない。
 ---
 
-# Steering Skill
+# Steering
 
 ## 役割
 
-- `.steering/[YYYYMMDD]-[task]/` を作業単位の正本として扱う
-- `implement-feature` 中は `tasklist.md` と実装を同期する
-- 実装完了後に同じ `.steering/...` を `validate-implementation` へ引き渡せる状態を保つ
-
-## ワークフロー上の位置
-
-1. `define-feature` が `docs/ideas/` の仕様を作成または更新する
-2. `plan-feature <docs/ideas/YYYYMMDD-[feature-name].md>` が `.steering/...` を作成する
-3. `implement-feature <.steering/...>` が `tasklist.md` に従って実装する
-4. `validate-implementation <.steering/...>` が実装を検証する
+- `.steering/[YYYYMMDD]-[task]/` を実装単位の要求、設計、進捗、検証証跡の正本にする
+- `docs/ideas/` の仕様を複製せず、今回の実装範囲と判断へ変換する
+- `$plan-feature`、`$implement-feature`、`$validate-implementation` の受け渡しを保つ
 
 ## 入力契約
 
-- `docs/ideas/` は仕様専用ディレクトリ
-- `docs/ideas/initial-requirements.md` は `setup-project` 用の初期要件
-- `plan-feature` に渡すのは `docs/ideas/YYYYMMDD-[feature-name].md`
-- `implement-feature` と `validate-implementation` に渡すのは対象 `.steering/[YYYYMMDD]-[task]/`
+- `$plan-feature`: `docs/ideas/YYYYMMDD-[feature-name].md`
+- `$implement-feature` / `$validate-implementation`: `.steering/[YYYYMMDD]-[task]/`
+- `docs/ideas/initial-requirements.md` から直接steeringを作らない
 
-## 計画時
+## 成果物
 
-1. 対象 feature spec と `docs/` の永続ドキュメント6点を確認する
-2. `initial-requirements.md` しかない、または `docs/` が未整備なら停止し、先に `setup-project` を案内する
-3. `plan-feature` が生成した `requirements.md` / `design.md` / `tasklist.md` を読み、元の feature spec と整合しているか確認する
-4. 実装に必要な粒度まで `tasklist.md` を具体化する
+- `requirements.md`: 目的、要件、受け入れ条件、スコープ外
+- `design.md`: 現状、設計、依存関係、エラー、テスト、実装順
+- `tasklist.md`: 小さなtask、状態、所有範囲、検証証跡、振り返り
 
-## 実装時
+新規作成時は [assets/requirements.md](assets/requirements.md)、[assets/design.md](assets/design.md)、[assets/tasklist.md](assets/tasklist.md) を土台にし、対象に不要な節は削る。
 
-1. 変更前に対象 `.steering/...` の3ファイルを読む
-2. `tasklist.md` の未完了タスクを1件選ぶ
-3. そのタスクだけを実装する
-4. 完了したら `tasklist.md` を更新する
-5. 設計判断が変わった場合だけ `requirements.md` / `design.md` も更新する
-6. 未完了タスクがなくなるまで繰り返す
+## 状態と更新規則
 
-## 引き継ぎ時
+- `pending`: 未着手
+- `in-progress`: 所有者と対象を確定して実行中
+- `done`: 受け入れ条件と検証証跡を満たす
+- `blocked`: 外部判断または技術的障害を理由付きで記録
+- `cancelled`: 方針変更により不要になった理由を記録
 
-- lint / test / 起動確認など、`tasklist.md` に含めた品質チェック結果を反映する
-- 同じ `.steering/...` を `validate-implementation` に明示入力できる状態にする
-- 実装検証そのものは `validate-implementation` で行う
+書き込みtaskは原則1件ずつ `in-progress` にし、完了またはblockedを記録してから依存taskへ進む。設計判断が変わった場合だけrequirements/designも更新する。
 
-## テンプレート
+## Validationへの引き継ぎ
 
-- `.agents/skills/steering/templates/requirements.md`
-- `.agents/skills/steering/templates/design.md`
-- `.agents/skills/steering/templates/tasklist.md`
+- 利用可能なlint、test、coverage、起動確認の結果をtasklistへ残す
+- 未実行項目は理由と未確認範囲を記録する
+- validation中はsteeringを変更せず、findingをmain agentへ返す
 
-## 重要ルール
+## 完了条件
 
-- `.steering/...` を読まずに実装・調査・レビューを始めない
-- `tasklist.md` を更新せずに次のタスクへ進まない
-- `initial-requirements.md` から直接 `.steering/` を作らない
-- タスクが大きすぎる場合は分割する
-- スキップは技術的理由を明記した場合だけ許可する
+- 3文書が相互整合し、元仕様と実装へ追跡できる。
+- task状態と実際のdiffが一致する。
+- 同じsteeringパスを次工程へ明示入力できる。

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Init Project"
+  short_description: "Expoプロジェクトの初期開発環境を安全に構築する"
+  default_prompt: "Use $init-project to create an Expo managed workflow baseline."
+policy:
+  allow_implicit_invocation: false
