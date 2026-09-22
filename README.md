@@ -6,8 +6,8 @@ React Native + Expo managed workflow + JavaScriptの新規プロジェクトを�
 
 ## 前提
 
-- Node 22
-- Expo SDK 54
+- Node 24
+- Expo SDK 57
 - npm
 - JavaScript（TypeScriptは既定で導入しない）
 

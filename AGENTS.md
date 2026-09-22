@@ -39,7 +39,7 @@
 
 - React Native + Expo managed workflow + JavaScriptを使用する
 - 明示依頼なしにTypeScriptを導入しない
-- Node 22とExpo SDK 54を明示依頼なしに変更しない
+- `PROJECT_CONTEXT.md` に指定されたNodeとExpo SDKのバージョンを明示依頼なしに変更しない
 - Expo関連依存は `npx expo install` で追加する
 - `package.json` に存在するlint、test、coverage scriptだけを実行する
 - 固定カバレッジ閾値は `docs/development-guidelines.md` で合意済みの場合だけ適用する

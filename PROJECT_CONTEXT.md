@@ -10,8 +10,8 @@
 - Framework: Expo managed workflow
 - Language: JavaScript（TypeScriptは既定で使用しない）
 - Package manager: npm
-- Node: 22
-- Expo SDK: 54
+- Node: 24
+- Expo SDK: 57
 
 ## 開発コマンド
 

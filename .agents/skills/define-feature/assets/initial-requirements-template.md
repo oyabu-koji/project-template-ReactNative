@@ -47,8 +47,8 @@ Do not use this file as input to `plan-feature`. Run `setup-project` first, then
 - React Native
 - Expo managed workflow
 - JavaScript (not TypeScript)
-- Node 22
-- Expo SDK 54
+- Node: use the version specified in `PROJECT_CONTEXT.md`
+- Expo SDK: use the version specified in `PROJECT_CONTEXT.md`
 
 ## Development Rules
 
